@@ -7,7 +7,6 @@ redirect = "127.0.0.1"
 website_list = ["www.facebook.com","facebook.com","www.twitter.com","twitter.com"]
 
 while True:
-
     #Checks if it is within working hours
     if dt(dt.now().year, dt.now().month, dt.now().day,8) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 16):
         print("Working hours.")
@@ -19,5 +18,12 @@ while True:
                 else:
                     file.write(redirect + " " + website+"\n")
     else:
+        with open(hosts_path, 'r+') as file:
+            content=file.readlines()
+            file.seek(0)
+            for line in content:
+                if not any(website in line for website in website_list):
+                    file.write(line)
+            file.truncate()
         print("Personal time.")
     time.sleep(5)
