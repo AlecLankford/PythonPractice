@@ -3,3 +3,6 @@ Map1.html
 
 #Ignores all database files
 *.db
+
+#Ensures books.db will NOT be ignored
+!books.db
