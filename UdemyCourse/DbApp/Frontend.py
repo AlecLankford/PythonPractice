@@ -1,6 +1,26 @@
 from tkinter import *
 import Backend
 
+#Returns row to binding of the list
+def getSelectedRow(event):
+    #Global variable so event can be accessed outside this funciton
+    global selectedTuple
+    #Returns index of selected row
+    index=list1.curselection()[0]
+    #Returns row based on selected index
+    selectedTuple = list1.get(index)
+    e1.delete(0,END)
+    e1.insert(END, selectedTuple[1])
+    
+    e2.delete(0,END)
+    e2.insert(END, selectedTuple[2])
+    
+    e3.delete(0,END)
+    e3.insert(END, selectedTuple[3])
+    
+    e4.delete(0,END)
+    e4.insert(END, selectedTuple[4])
+
 #Inserts data into the list box when the user selects view all
 def viewCommand():
     #Ensures the list box is empty before displaying records
@@ -25,9 +45,19 @@ def insertCommand():
     list1.delete(0,END)
     list1.insert(END,(titleText.get(),authorText.get(),yearText.get(),isbnText.get()))
 
+#Allows a user to delete a specified row
+def deleteCommand():
+    Backend.delete(selectedTuple[0])
+
+def updateCommand():
+    Backend.update(selectedTuple[0],titleText.get(),authorText.get(),yearText.get(),isbnText.get())
+
 
 #Creation of the window for GUI
 window = Tk()
+
+#Setting the title of the window
+window.wm_title("Bookstore")
 
 #Setting the labels for the entry fields
 l1 = Label(window, text="Title")
@@ -67,6 +97,8 @@ list1.grid(row=2, column=0, rowspan=6, columnspan=2)
 scrollBar1 = Scrollbar(window)
 scrollBar1.grid(row=2, column=2, rowspan=6)
 
+list1.bind('<<ListboxSelect>>',getSelectedRow)
+
 #Connects scrollbar to list, and list to scrollbar
 list1.configure(yscrollcommand=scrollBar1.set)
 scrollBar1.configure(command=list1.yview)
@@ -81,13 +113,13 @@ b2.grid(row=3, column = 3)
 b3 = Button(window,text="Add entry", width=12, command=insertCommand)
 b3.grid(row=4, column = 3)
 
-b4 = Button(window,text="Update selected", width=12)
+b4 = Button(window,text="Update selected", width=12, command=updateCommand)
 b4.grid(row=5, column = 3)
 
-b5 = Button(window,text="Delete selected", width=12)
+b5 = Button(window,text="Delete selected", width=12, command=deleteCommand)
 b5.grid(row=6, column = 3)
 
-b6 = Button(window,text="Close", width=12)
+b6 = Button(window,text="Close", width=12, command=window.destroy)
 b6.grid(row=7, column = 3)
 
 window.mainloop()
