@@ -3,23 +3,27 @@ import Backend
 
 #Returns row to binding of the list
 def getSelectedRow(event):
-    #Global variable so event can be accessed outside this funciton
-    global selectedTuple
-    #Returns index of selected row
-    index=list1.curselection()[0]
-    #Returns row based on selected index
-    selectedTuple = list1.get(index)
-    e1.delete(0,END)
-    e1.insert(END, selectedTuple[1])
-    
-    e2.delete(0,END)
-    e2.insert(END, selectedTuple[2])
-    
-    e3.delete(0,END)
-    e3.insert(END, selectedTuple[3])
-    
-    e4.delete(0,END)
-    e4.insert(END, selectedTuple[4])
+    try:
+        #Global variable so event can be accessed outside this funciton
+        global selectedTuple
+        #Returns index of selected row
+        index=list1.curselection()[0]
+        #Returns row based on selected index
+        selectedTuple = list1.get(index)
+        
+        e1.delete(0,END)
+        e1.insert(END, selectedTuple[1])
+        
+        e2.delete(0,END)
+        e2.insert(END, selectedTuple[2])
+        
+        e3.delete(0,END)
+        e3.insert(END, selectedTuple[3])
+        
+        e4.delete(0,END)
+        e4.insert(END, selectedTuple[4])
+    except IndexError:
+        pass
 
 #Inserts data into the list box when the user selects view all
 def viewCommand():
