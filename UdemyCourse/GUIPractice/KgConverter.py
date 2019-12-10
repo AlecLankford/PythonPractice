@@ -5,16 +5,20 @@ window = Tk()
 
 #Function to convert kg to g,lb, and oz
 def kgConvert():
-    #Executes conversion and places the values into a string
+    #Finds the conversion value, deletes the previous value from the text widgets
     grams = float(entryValue.get())*1000
+    g.delete("1.0",END)
+    g.insert(END, grams)
 
     pounds = float(entryValue.get())*2.20462
+    lb.delete("1.0",END)
+    lb.insert(END, pounds)
 
     ounces = float(entryValue.get())*35.274
+    oz.delete("1.0",END)
+    oz.insert(END, ounces)
 
-    outputText = ("Grams: " + str(grams) + ", Pounds: " + str(pounds) + ", Ounces: " + str(ounces))
 
-    text.insert(END, outputText)
 
 #Creates execute button and dictates its location
 btn1 = Button(window, text="Convert", command=kgConvert)
@@ -27,8 +31,14 @@ entryValue = StringVar()
 entry = Entry(window, textvariable=entryValue)
 entry.grid(row=0,column=1)
 
-#Creates a text widget and dictates its location and size
-text = Text(window,height=1,width=60)
-text.grid(row=0,column=2)
+#Creates a text widget for gs,lbs,ozs and dictates their location and size
+g = Text(window,height=1,width=20)
+g.grid(row=1,column=0)
+
+lb = Text(window, height=1,width=20)
+lb.grid(row=1,column=1)
+
+oz = Text(window, height=1,width=20)
+oz.grid(row=1,column=2)
 
 window.mainloop()
