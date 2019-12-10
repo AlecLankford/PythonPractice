@@ -1,5 +1,7 @@
 from tkinter import *
+import Backend
 
+#Creation of the window for GUI
 window = Tk()
 
 #Setting the labels for the entry fields
@@ -44,6 +46,7 @@ scrollBar1.grid(row=2, column=2, rowspan=6)
 list1.configure(yscrollcommand=scrollBar1.set)
 scrollBar1.configure(command=list1.yview)
 
+#Creation of all buttons
 b1 = Button(window,text="View all", width=12)
 b1.grid(row=2, column = 3)
 
