@@ -1,2 +1,5 @@
+#Ignores HTML file created by WebMap script
 Map1.html
-lite.db
+
+#Ignores all database files
+*.db
