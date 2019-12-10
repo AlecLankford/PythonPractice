@@ -34,6 +34,7 @@ def search(title="",author="",year="",isbn=""):
     connection.close()
     return rows
 
+#Deletes a specified record
 def delete(id):
     connection = sqlite3.connect("books.db")
     cursor = connection.cursor()
@@ -41,6 +42,7 @@ def delete(id):
     connection.commit()
     connection.close()
 
+#Updates a specified record
 def update(id,title,author,year,isbn):
     connection = sqlite3.connect("books.db")
     cursor = connection.cursor()
@@ -48,11 +50,8 @@ def update(id,title,author,year,isbn):
     connection.commit()
     connection.close()
 
-
 connect()
 
-#insert("The Earth","John Smith",1920,12312312312)
-#update(2,"The Moon","John Smooth",1917,1231231244)
 print(view())
 
 
